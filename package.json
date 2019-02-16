@@ -1,0 +1,25 @@
+{
+  "name": "steedos",
+  "version": "0.0.1",
+  "description": "Develop and run your enterprise apps in miniutes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "steedos": "./bin/steedos"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/steedos/cli.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/steedos/cli/issues"
+  },
+  "homepage": "https://github.com/steedos/cli#readme",
+  "dependencies": {
+    "commander": "^2.19.0"
+  }
+}

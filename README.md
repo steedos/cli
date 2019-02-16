@@ -1,2 +1,2 @@
-# cli
-deploy and run your steedos apps
+# Steedos
+Develop and run your enterprise apps in miniutes
