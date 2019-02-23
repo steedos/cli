@@ -1,7 +1,14 @@
 # Steedos
 Develop and run your enterprise apps in miniutes
 
-### install 
+### install from github
+```
+git clone https://github/steedos/cli
+cd cli
+npm i -g
+```
+
+### install from npm
 ```
 npm i steedos -g
 ```
