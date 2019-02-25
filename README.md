@@ -20,7 +20,7 @@ meteor build --directory C:\srv\creator-build
 
 ### run bundle
 ```
-steedos run -s C:\srv\creator-build\bundle
+steedos run -s C:\srv\creator-build
 ```
 
 ### develop app
@@ -28,7 +28,7 @@ steedos run -s C:\srv\creator-build\bundle
 - write main.js
 - steedos run will load main.js on bootstrap
 ```
-steedos run -s C:\srv\creator-build\bundle
+steedos run -s C:\srv\creator-build
 ```
 
 ### help
