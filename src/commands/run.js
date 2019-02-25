@@ -13,11 +13,12 @@ class RunCommand extends Command {
       this.log(`serverDir not found: ${serverDir}`);
       return
     }  
-    this.log(`Starting steedos server: ${serverDir}`);
 
-    process.env.PORT = flags.port || "3000"
-    process.env.ROOT_URL = flags.rootUrl || "http://127.0.0.1:" + process.env.PORT
-    process.env.MONGO_URL = flags.mongoUrl || "mongodb://127.0.0.1/steedos"
+    process.env.PORT = flags.port
+    process.env.ROOT_URL = flags.rootUrl
+    process.env.MONGO_URL = flags.mongoUrl
+
+    this.log(`Starting steedos server: ${process.env.ROOT_URL}`);
     
     __steedos_bootstrap__ = {
         projectDir: process.cwd(),
@@ -40,9 +41,9 @@ Extra documentation goes here
 
 RunCommand.flags = {
     serverDir: flags.string({char: 's', description: 'Steedos Server Dir', required: true}),
-    port: flags.string({char: 'p', description: 'Steedos Server PORT', env: "PORT"}),
-    rootUrl: flags.string({char: 'r', description: 'Steedos Server rootUrl', env: "ROOT_URL"}),
-    mongoUrl: flags.string({char: 'm', description: 'MongoDB Server UrL', env: "MONGO_URL"}),
+    port: flags.string({char: 'p', description: 'Steedos Server PORT', default:"3000", env: "PORT"}),
+    rootUrl: flags.string({char: 'r', description: 'Steedos Server rootUrl', default:"http://127.0.0.1:3000", env: "ROOT_URL"}),
+    mongoUrl: flags.string({char: 'm', description: 'MongoDB Server UrL', default:"mongodb://127.0.0.1/steedos", env: "MONGO_URL"}),
     verbose: flags.boolean({char: 'v', description: 'Show loggins', hidden: true})
 }
 
