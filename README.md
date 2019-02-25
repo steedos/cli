@@ -3,7 +3,7 @@ Develop and run your enterprise apps in miniutes
 
 ### install from npm
 ```
-npm i steedos -g
+npm i steedos-cli -g
 ```
 
 ### install from src
@@ -20,7 +20,7 @@ meteor build --directory C:\srv\creator-build
 
 ### run bundle
 ```
-steedos run -s C:\srv\creator-build\bundle\programs\server
+steedos run -s C:\srv\creator-build\bundle
 ```
 
 ### develop app
@@ -28,7 +28,7 @@ steedos run -s C:\srv\creator-build\bundle\programs\server
 - write main.js
 - steedos run will load main.js on bootstrap
 ```
-steedos run -s C:\srv\creator-build\bundle\programs\server
+steedos run -s C:\srv\creator-build\bundle
 ```
 
 ### help
