@@ -1,5 +1,5 @@
 {
-  "name": "steedos",
+  "name": "steedos-cli",
   "version": "0.0.1",
   "description": "Develop and run your enterprise apps in miniutes",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "steedos": "./bin/steedos"
+    "steedos": "./bin/run"
   },
   "repository": {
     "type": "git",
@@ -19,8 +19,15 @@
     "url": "https://github.com/steedos/cli/issues"
   },
   "homepage": "https://github.com/steedos/cli#readme",
+  "files": [
+    "/bin",
+    "/src"
+  ],
   "dependencies": {
     "commander": "^2.19.0",
+    "@oclif/command": "^1",
+    "@oclif/config": "^1",
+    "@oclif/plugin-help": "^2",
     "fibers": "3.1.1",
     "meteor-promise": "0.8.5",
     "node-gyp": "3.6.0",
@@ -29,5 +36,22 @@
     "semver": "5.3.0",
     "source-map-support": "^0.5.10",
     "underscore": "1.5.2"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "^1",
+    "@oclif/test": "^1",
+    "chai": "^4",
+    "eslint": "^5.13",
+    "eslint-config-oclif": "^3.1",
+    "globby": "^8",
+    "mocha": "^5",
+    "nyc": "^13"
+  },
+  "oclif": {
+    "commands": "./src/commands",
+    "bin": "steedos",
+    "plugins": [
+      "@oclif/plugin-help"
+    ]
   }
 }
