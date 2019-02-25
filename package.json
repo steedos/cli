@@ -24,18 +24,11 @@
     "/src"
   ],
   "dependencies": {
-    "commander": "^2.19.0",
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
-    "fibers": "3.1.1",
-    "meteor-promise": "0.8.5",
-    "node-gyp": "3.6.0",
-    "node-pre-gyp": "0.6.34",
-    "promise": "8.0.1",
-    "semver": "5.3.0",
-    "source-map-support": "^0.5.10",
-    "underscore": "1.5.2"
+    "@steedos/meteor-bundle-runner": "^1.0.1",
+    "@steedos/meteor-bundle-dependices": "0.0.1"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1",
