@@ -10,15 +10,11 @@ class RunCommand extends Command {
     var serverDir = flags.serverDir;          
     var npmRoot = require('child_process').execSync('npm root -g').toString().trim()
     if (!serverDir) {
-      // use steedos server from current project 
-      serverDir = path.join(process.cwd(), "node_modules", "steedos-server", "bundle", "programs", "server")
-      if (!fs.existsSync(serverDir)) {
-        try {
-          serverDir = path.join(npmRoot, "steedos-server", "bundle", "programs", "server")
-        } catch (err) {
-          console.error(`Install steedos server globally first with: npm install -g steedos-server`)
-          process.exit(1)
-        }
+      try {
+        serverDir = path.join(npmRoot, "steedos-server", "bundle", "programs", "server")
+      } catch (err) {
+        console.error(`Install steedos server globally first with: npm install -g steedos-server`)
+        process.exit(1)
       }
     } else {
       serverDir = path.join(serverDir, "bundle", "programs", "server");

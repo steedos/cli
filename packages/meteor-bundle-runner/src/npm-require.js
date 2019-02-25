@@ -165,8 +165,8 @@ function resolve(id) {
 
   resolveCache[id] =
     resolveInLocalBuild(id) ||
-    resolveInNodeModules(id) ||
-    resolveInGlobalNpm(id) ||
+    resolveInProjectNodeModules(id) ||
+    resolveInServerNodeModules(id) ||
     resolveInDevBundle(id) ||
     null;
 
@@ -182,21 +182,21 @@ function resolveInLocalBuild(id) {
   return tryResolve(id);
 }
 
-function resolveInGlobalNpm(id) {
+function resolveInServerNodeModules(id) {
   var ids = id.split("node_modules/")
   if (ids.length>1) {
     id = ids[ids.length-1];
   }
   var absId;
-  absId = path.join(__steedos_bootstrap__.globalNpmDir, id);
+  absId = path.join(__steedos_bootstrap__.serverDir, "..", "..", "..", "node_modules", id);
   if (__steedos_bootstrap__.verbose)
-    console.log("npm-require.js resolveInGlobalNpm " + absId);
+    console.log("npm-require.js resolveInServerNodeModules " + absId);
 
   return absId && tryResolve(files.convertToOSPath(absId));
 }
 
 // resolve in project node_modules
-function resolveInNodeModules(id) {
+function resolveInProjectNodeModules(id) {
   // move meteor package node modules to root
   // FOR EXAMPLE
   // src: /node_modules/meteor/{package_name}/node_modules/{module_name}/
@@ -208,7 +208,7 @@ function resolveInNodeModules(id) {
   var absId;
   absId = path.join(__steedos_bootstrap__.projectDir, "node_modules", id);
   if (__steedos_bootstrap__.verbose)
-    console.log("npm-require.js resolveInNodeModules " + absId);
+    console.log("npm-require.js resolveInProjectNodeModules " + absId);
 
   // sortedNodeModulesPaths.some(function (prefix) {
   //   var relId = files.pathRelative(
