@@ -166,6 +166,7 @@ function resolve(id) {
   resolveCache[id] =
     resolveInLocalBuild(id) ||
     resolveInNodeModules(id) ||
+    resolveInGlobalNpm(id) ||
     resolveInDevBundle(id) ||
     null;
 
@@ -179,6 +180,19 @@ function resolveInLocalBuild(id) {
   if (__steedos_bootstrap__.verbose)
     console.log("npm-require.js resolveInLocalBuild " + id);
   return tryResolve(id);
+}
+
+function resolveInGlobalNpm(id) {
+  var ids = id.split("node_modules/")
+  if (ids.length>1) {
+    id = ids[ids.length-1];
+  }
+  var absId;
+  absId = path.join(__steedos_bootstrap__.globalNpmDir, id);
+  if (__steedos_bootstrap__.verbose)
+    console.log("npm-require.js resolveInGlobalNpm " + absId);
+
+  return absId && tryResolve(files.convertToOSPath(absId));
 }
 
 // resolve in project node_modules

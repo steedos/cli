@@ -7,11 +7,26 @@ __steedos_bootstrap__ =  {}
 class RunCommand extends Command {
   async run() {
     const {flags} = this.parse(RunCommand)
-    const serverDir = path.join(flags.serverDir, "bundle", "programs", "server");
+    var serverDir = flags.serverDir;          
+    var npmRoot = require('child_process').execSync('npm root -g').toString().trim()
+    if (!serverDir) {
+      // use steedos server from current project 
+      serverDir = path.join(process.cwd(), "node_modules", "steedos-server", "bundle", "programs", "server")
+      if (!fs.existsSync(serverDir)) {
+        try {
+          serverDir = path.join(npmRoot, "steedos-server", "bundle", "programs", "server")
+        } catch (err) {
+          console.error(`Install steedos server globally first with: npm install -g steedos-server`)
+          process.exit(1)
+        }
+      }
+    } else {
+      serverDir = path.join(serverDir, "bundle", "programs", "server");
+    }
     if (!fs.existsSync(serverDir))
     {
       this.log(`serverDir not found: ${serverDir}`);
-      return
+      return;
     }  
 
     process.env.PORT = flags.port
@@ -23,6 +38,7 @@ class RunCommand extends Command {
     __steedos_bootstrap__ = {
         projectDir: process.cwd(),
         serverDir: serverDir,
+        globalNpmDir: path.join(npmRoot, "steedos-server", "node_modules"), 
         rootUrl: process.env.ROOT_URL,
         mongoUrl: process.env.MONGO_URL,
         verbose: flags.verbose
@@ -40,7 +56,7 @@ Extra documentation goes here
 `
 
 RunCommand.flags = {
-    serverDir: flags.string({char: 's', description: 'Steedos Server Dir', required: true}),
+    serverDir: flags.string({char: 's', description: 'Steedos Server Dir'}),
     port: flags.string({char: 'p', description: 'Steedos Server PORT', default:"3000", env: "PORT"}),
     rootUrl: flags.string({char: 'r', description: 'Steedos Server rootUrl', default:"http://127.0.0.1:3000", env: "ROOT_URL"}),
     mongoUrl: flags.string({char: 'm', description: 'MongoDB Server UrL', default:"mongodb://127.0.0.1/steedos", env: "MONGO_URL"}),
