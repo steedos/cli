@@ -7,7 +7,8 @@ __steedos_bootstrap__ =  {}
 class RunCommand extends Command {
   async run() {
     const {flags} = this.parse(RunCommand)
-    var serverDir = flags.serverDir;          
+    var serverDir = flags.serverDir;       
+    var projectDir = process.cwd();   
     var npmRoot = require('child_process').execSync('npm root -g').toString().trim()
     if (!serverDir) {
       try {
@@ -29,10 +30,21 @@ class RunCommand extends Command {
     process.env.ROOT_URL = flags.rootUrl
     process.env.MONGO_URL = flags.mongoUrl
 
-    this.log(`Starting steedos server: ${process.env.ROOT_URL}`);
+    this.log("*******************************************************************");
+    this.log("*")
+    this.log(`*  Starting Steedos Server ...`);
+    this.log("*")
+    this.log(`*  PORT: ${process.env.PORT}`);
+    this.log(`*  ROOT_URL: ${process.env.ROOT_URL}`);
+    this.log(`*  MONGO_URL: ${process.env.MONGO_URL}`);
+    this.log(`*  PROJECT_DIR: ${projectDir}`);
+    this.log(`*  SERVER_DIR: ${serverDir}`);
+    this.log("*")
+    this.log("*******************************************************************");
+    
     
     __steedos_bootstrap__ = {
-        projectDir: process.cwd(),
+        projectDir: projectDir,
         serverDir: serverDir,
         globalNpmDir: path.join(npmRoot, "steedos-server", "node_modules"), 
         rootUrl: process.env.ROOT_URL,
