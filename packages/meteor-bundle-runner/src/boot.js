@@ -469,9 +469,10 @@ var runMain = Profile("Run main()", function () {
 });
 
 loadProjectBundles = function(){
-  var mainJs = path.join(__steedos_bootstrap__.projectDir, "main.js");
-  if (fs.existsSync(mainJs)){
-    require(mainJs);
+  require('./main.js');
+  var indexJs = path.join(__steedos_bootstrap__.projectDir, "index.js");
+  if (fs.existsSync(indexJs)){
+    require(indexJs);
   }
 }
 
