@@ -1,6 +1,9 @@
 const {Command, flags} = require('@oclif/command')
 path = require("path")
 fs = require("fs")
+const yaml = require('js-yaml');
+
+settingsFileName = 'settings.yml'
 
 __steedos_bootstrap__ =  {}
 
@@ -25,6 +28,19 @@ class RunCommand extends Command {
       this.log(`serverDir not found: ${serverDir}`);
       return;
     }  
+
+    var settingsPath = path.join(projectDir, settingsFileName)
+    var settings;
+    if(fs.existsSync(settingsPath)){
+      try {
+        settings = yaml.safeLoad(fs.readFileSync(settingsPath, 'utf8'));
+      } catch (error) {
+        this.log(`Invalid settings.yml`, error)
+      }
+    }
+    if(settings){
+      process.env.METEOR_SETTINGS = JSON.stringify(settings)
+    }
 
     process.env.PORT = flags.port
     process.env.ROOT_URL = flags.rootUrl

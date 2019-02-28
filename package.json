@@ -44,7 +44,8 @@
     "globby": "^8.0.2",
     "mocha": "^5.2.0",
     "nyc": "^13.3.0",
-    "rimraf": "^2.6.3"
+    "rimraf": "^2.6.3",
+    "js-yaml": "3.12.1"
   },
   "oclif": {
     "commands": "./src/commands",
