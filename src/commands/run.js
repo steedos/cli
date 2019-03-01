@@ -12,6 +12,7 @@ class RunCommand extends Command {
     const {flags} = this.parse(RunCommand)
     var serverDir = flags.serverDir;       
     var projectDir = process.cwd();   
+    process.env.NODE_OPTIONS="";
     var npmRoot = require('child_process').execSync('npm root -g').toString().trim()
     if (!serverDir) {
       try {
