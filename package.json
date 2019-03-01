@@ -1,6 +1,6 @@
 {
   "name": "steedos-cli",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Develop and run your enterprise apps in miniutes",
   "main": "src/index.js",
   "scripts": {
