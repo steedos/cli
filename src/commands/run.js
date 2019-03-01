@@ -1,6 +1,7 @@
 const {Command, flags} = require('@oclif/command')
 path = require("path")
 fs = require("fs")
+os = require("os")
 const yaml = require('js-yaml');
 
 settingsFileName = 'settings.yml'
@@ -29,6 +30,10 @@ class RunCommand extends Command {
       this.log(`serverDir not found: ${serverDir}`);
       return;
     }  
+    
+    var rootUrl = flags.rootUrl;      
+    if (!rootUrl) 
+      rootUrl = "http://" + os.hostname() + ":" + flags.port
 
     var settingsPath = path.join(projectDir, settingsFileName)
     var settings;
@@ -44,7 +49,7 @@ class RunCommand extends Command {
     }
 
     process.env.PORT = flags.port
-    process.env.ROOT_URL = flags.rootUrl
+    process.env.ROOT_URL = rootUrl
     process.env.MONGO_URL = flags.mongoUrl
 
     this.log("*******************************************************************");
@@ -83,7 +88,7 @@ Extra documentation goes here
 RunCommand.flags = {
     serverDir: flags.string({char: 's', description: 'Steedos Server Dir'}),
     port: flags.string({char: 'p', description: 'Steedos Server PORT', default:"3000", env: "PORT"}),
-    rootUrl: flags.string({char: 'r', description: 'Steedos Server rootUrl', default:"http://127.0.0.1:3000", env: "ROOT_URL"}),
+    rootUrl: flags.string({char: 'r', description: 'Steedos Server rootUrl', env: "ROOT_URL"}),
     mongoUrl: flags.string({char: 'm', description: 'MongoDB Server UrL', default:"mongodb://127.0.0.1/steedos", env: "MONGO_URL"}),
     verbose: flags.boolean({char: 'v', description: 'Show loggins', hidden: true})
 }
