@@ -1,5 +1,6 @@
 var fs = require("fs")
 var os = require("os")
+var path = require("path")
 
 var serverDir = process.env.SERVER_DIR;  
 if (!serverDir) {
@@ -34,6 +35,12 @@ if (!rootUrl) {
     process.env.ROOT_URL = rootUrl
 }
 
+var mongoUrl =  process.env.MONGO_URL;       
+if (!mongoUrl) {  
+  mongoUrl = "mongodb://127.0.0.1/steedos";
+  process.env.MONGO_URL = mongoUrl
+}
+
 var settingsFileName = 'settings.yml'
 var settingsPath = path.join(projectDir, settingsFileName)
 var settings;
@@ -51,8 +58,8 @@ if(settings){
 __steedos_bootstrap__ = {
     projectDir: projectDir,
     serverDir: serverDir,
-    rootUrl: process.env.ROOT_URL,
-    mongoUrl: process.env.MONGO_URL,
+    rootUrl: rootUrl,
+    mongoUrl: mongoUrl,
     verbose: false
 }
 
