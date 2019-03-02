@@ -26,8 +26,10 @@ if (!fs.existsSync(serverDir))
 var projectDir = process.cwd();   
 
 var port = process.env.PORT;
-if (!port)
+if (!port){
   port = 3000;
+  process.env.PORT = port
+}
 
 var rootUrl = process.env.ROOT_URL;      
 if (!rootUrl) {
