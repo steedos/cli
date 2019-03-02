@@ -468,18 +468,28 @@ var runMain = Profile("Run main()", function () {
   }
 });
 
-loadProjectBundles = function(){
+var loadProjectBundles = function(){
   var indexJs = path.join(__steedos_bootstrap__.projectDir, "index.js");
   if (fs.existsSync(indexJs)){
     require(indexJs);
   }
 }
 
-Fiber(function () {
-  Profile.run("Server startup", function () {
-    loadServerBundles();
-    loadProjectBundles();
-    callStartupHooks();
-    runMain();
-  });
-}).run();
+var run = function(){
+  Fiber(function () {
+    Profile.run("Server startup", function () {
+      loadServerBundles();
+      loadProjectBundles();
+      callStartupHooks();
+      runMain();
+    });
+  }).run();
+}
+
+module.exports = {
+  loadServerBundles,
+  loadProjectBundles,
+  callStartupHooks,
+  runMain,
+  run
+}

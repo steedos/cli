@@ -1,8 +1,8 @@
 {
   "name": "@steedos/meteor-bundle-runner",
-  "version": "1.0.7",
+  "version": "1.1.0",
   "description": "Run meteor bundles and inject your own nodejs code.",
-  "main": "src/boot.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
