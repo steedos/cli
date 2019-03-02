@@ -1,13 +1,14 @@
 const fs = require("fs");
 const path = require("path");
 const yaml = require('js-yaml');
+const projectDir = path.resolve(__dirname, '../../../');
 
 const appFileName = 'app.yml';
 const objectFolderName = 'objects';
 const triggerFolderName = 'triggers';
 const actionFolderName = 'actions';
 const reportFolderName = 'reports';
-const srcDirectory = path.join(__steedos_bootstrap__.projectDir, "steedos-app");
+const srcDirectory = path.join(projectDir, "steedos-app");
 
 const loadJSONFile = (filePath)=>{
     return JSON.parse(fs.readFileSync(filePath, 'utf8').normalize('NFC'));
@@ -117,6 +118,7 @@ const loadReport = (reportPath)=>{
 }
 
 if(fs.existsSync(srcDirectory) && fs.statSync(srcDirectory).isDirectory()){
+    console.log('load srcDirectory', srcDirectory);
     fs.readdir(srcDirectory, (err, appFiles)=>{
         //读取 app
         const appFilePath = path.join(srcDirectory, appFileName);
