@@ -1,15 +1,16 @@
-const path = require("path")
-const projectDir = path.resolve(__dirname, '../../../')
-const {steedos} = require(`${projectDir}/package.json`);
+// const path = require("path")
+// const projectDir = path.resolve(__dirname, '../../../')
+// const {steedos} = require(`${projectDir}/package.json`);
 
-const steedos_plugins = steedos.plugins
+// const steedos_plugins = steedos.plugins
 
-// const projectNodeModules = path.join(projectDir, 'node_modules');
+// // const projectNodeModules = path.join(projectDir, 'node_modules');
 
-//先加载plugin, 再加载本地app
-_.each(steedos_plugins, (plugin)=>{
-    // require(path.join(projectNodeModules,plugin));
-    require(require.resolve(plugin))
-})
+// //先加载plugin, 再加载本地app
+// _.each(steedos_plugins, (plugin)=>{
+//     // require(path.join(projectNodeModules,plugin));
+//     require(require.resolve(plugin))
+// })
 
-require('./load.js');
+// require('./load.js');
+exports.load = require("plugins").load;

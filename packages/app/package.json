@@ -1,6 +1,6 @@
 {
   "name": "@steedos/app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "load creator app from .yml",
   "main": "index.js",
   "scripts": {
@@ -11,5 +11,8 @@
   "dependencies": {
     "underscore": "1.5.2",
     "js-yaml": "3.12.1"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
