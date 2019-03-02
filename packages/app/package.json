@@ -1,0 +1,15 @@
+{
+  "name": "@steedos/app",
+  "version": "1.0.0",
+  "description": "load creator app from .yml",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "underscore": "1.5.2",
+    "js-yaml": "3.12.1"
+  }
+}
