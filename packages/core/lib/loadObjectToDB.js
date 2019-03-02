@@ -1,8 +1,13 @@
-const loadObjectToDB = (obj) => {
+exports.loadObjectToDB = function (obj) {
     var collection = Cretor.getCollection('Objects');
     collection.upsert({
         name: obj.name
     }, obj);
 }
 
-module.exports = loadObjectToDB;
+exports.loadTriggerToDB = function (trigger) {
+    var collection = Cretor.getCollection('Objects');
+    collection.upsert({
+        name: trigger.name
+    }, trigger);
+}
