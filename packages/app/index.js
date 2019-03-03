@@ -13,4 +13,4 @@
 // })
 
 // require('./load.js');
-exports.load = require("plugins").load;
+exports.load = require("./plugins").load;

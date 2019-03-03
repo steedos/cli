@@ -479,8 +479,8 @@ var run = function(){
   Fiber(function () {
     Profile.run("Server startup", function () {
       loadServerBundles();
-      loadProjectBundles();
       callStartupHooks();
+      loadProjectBundles();
       runMain();
     });
   }).run();
@@ -491,5 +491,7 @@ module.exports = {
   loadProjectBundles,
   callStartupHooks,
   runMain,
-  run
+  run,
+  Fiber,
+  Profile
 }
