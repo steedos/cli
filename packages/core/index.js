@@ -1,1 +1,1 @@
-module.exports = require('lib/loadObjectToDB');
+module.exports = require('./lib/loadObjectToDB');
