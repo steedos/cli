@@ -1,7 +1,7 @@
 // fix: Meteor code must always run within a Fiber.
 var Fiber = require("fibers");
 
-exports.loadObjectToDB = function (obj) {
+exports.loadObject = function (obj) {
     var collection = Creator.getCollection('objects');
     Fiber(function () {
         collection.upsert({
@@ -12,7 +12,7 @@ exports.loadObjectToDB = function (obj) {
     }).run();
 }
 
-exports.loadTriggerToDB = function (trigger) {
+exports.loadTrigger = function (trigger) {
     var collection = Creator.getCollection('objects');
     Fiber(function () {
         collection.upsert({
@@ -23,7 +23,7 @@ exports.loadTriggerToDB = function (trigger) {
     }).run();
 }
 
-exports.loadReportsToDB = function (report) {
+exports.loadReports = function (report) {
     var collection = Creator.getCollection('reports');
     if (!report.space) {
         report.space = 'global';

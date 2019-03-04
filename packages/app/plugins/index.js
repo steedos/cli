@@ -2,6 +2,7 @@ const _ = require("underscore");
 const fs = require("fs");
 const path = require("path");
 const yaml = require('js-yaml');
+const loadToDB = require('../lib/loadToDB');
 
 const appFileName = 'app.yml';
 const objectFolderName = 'objects';
@@ -79,7 +80,7 @@ const triggerMapping = {
         on: 'server',
         when: 'after.remove'
     }
-} 
+}
 const loadTrigger = (triggerPath)=>{
     let trigger = loadJSFile(triggerPath);
     let object_name = trigger.object_name
@@ -93,7 +94,7 @@ const loadTrigger = (triggerPath)=>{
         console.error(`load trigger error：Invalid 'object_name' /r ${triggerPath}`)
         return
     }
-    
+
     if(!object.triggers){
         object.triggers = {}
     }
@@ -114,6 +115,7 @@ const loadTrigger = (triggerPath)=>{
 const loadReport = (reportPath)=>{
     let report = loadFile(reportPath);
     Creator.Reports[report._id] = report;
+    loadToDB.loadReports(report);
 }
 
 exports.load = function(srcDirectory) {
@@ -128,7 +130,7 @@ exports.load = function(srcDirectory) {
                 //     loadApp(appFilePath);
                 // });
             }
-            
+
             //读取 object
             const objectFolderPath = path.join(srcDirectory, objectFolderName);
             if(fs.existsSync(objectFolderPath)){
