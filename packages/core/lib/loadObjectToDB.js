@@ -25,6 +25,9 @@ exports.loadTriggerToDB = function (trigger) {
 
 exports.loadReportsToDB = function (report) {
     var collection = Creator.getCollection('reports');
+    if (!report.space) {
+        report.space = 'global';
+    }
     Fiber(function () {
         collection.upsert({
             _id: report._id
