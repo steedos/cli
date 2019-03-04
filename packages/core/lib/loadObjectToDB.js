@@ -1,14 +1,35 @@
+// fix: Meteor code must always run within a Fiber.
+var Fiber = require("fibers");
+
 exports.loadObjectToDB = function (obj) {
     var collection = Creator.getCollection('objects');
-    // TODO fix: Meteor code must always run within a Fiber.
-    collection.upsert({
-        name: obj.name
-    }, obj);
+    Fiber(function () {
+        collection.upsert({
+            name: obj.name
+        }, {
+            $set: obj
+        });
+    }).run();
 }
 
 exports.loadTriggerToDB = function (trigger) {
     var collection = Creator.getCollection('objects');
-    collection.upsert({
-        name: trigger.name
-    }, trigger);
+    Fiber(function () {
+        collection.upsert({
+            name: trigger.name
+        }, {
+            $set: trigger
+        });
+    }).run();
+}
+
+exports.loadReportsToDB = function (report) {
+    var collection = Creator.getCollection('reports');
+    Fiber(function () {
+        collection.upsert({
+            _id: report._id
+        }, {
+            $set: report
+        });
+    }).run();
 }
